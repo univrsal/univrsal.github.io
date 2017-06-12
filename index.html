@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="main.css">
 	<!-- Material Design Lite -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
@@ -11,6 +11,17 @@
 
 </head>
 <body>
+
+	<style>
+		.demo-layout-transparent {
+			background: url('img/header.jpg') center / cover;
+			height: 30%;
+		}
+		.demo-layout-transparent .mdl-layout__header,
+		.demo-layout-transparent .mdl-layout__drawer-button {
+		  color: white;
+		}
+	</style>
 
 	<div class="demo-layout-transparent mdl-layout mdl-js-layout">
 		<header class="mdl-layout__header mdl-layout__header--transparent">
@@ -40,5 +51,6 @@
 		<main class="mdl-layout__content">
 		</main>
 	</div>
+
 </body>
 </html>
