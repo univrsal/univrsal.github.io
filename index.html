@@ -49,11 +49,32 @@
 		}
 
 		.main-footer {
-						-webkit-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
+			-webkit-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 			-moz-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 			box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 		}
 
+		.info-card.mdl-card {
+			width: 320px;
+			height: 220px;
+		}
+		.card-jeb > .mdl-card__title {
+			color: #fff;
+			background:
+			url('./assets/img/jeb.png') bottom right 15% no-repeat #46B6AC;
+		}
+
+		.card-mpdq > .mdl-card__title {
+			color: #fff;
+			background:
+			url('./assets/img/mpdq.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.blog-card > .mdl-card__title {
+			color: #424242;
+			background:
+			url('./assets/img/blog.png') bottom right 15% no-repeat #46B6AC;	
+		}
 	</style>
 
 	<div class="main-container mdl-layout mdl-js-layout">
@@ -109,28 +130,89 @@
 
 		<main class="mdl-layout__content">
 			<div class="mdl-grid main-grid">
-				<div class="mdl-cell mdl-cell--2-col space-side"></div>
-				<div class="mdl-cell mdl-cell--5-col text-middle">
+				<div class="mdl-cell mdl-cell--2-col"></div>
+
+				<div class="mdl-cell mdl-cell--8-col">
 					<h3>Oh, hello there</h3>
 					<div class="body-text">
-						Looks like you made it to this site somehow. Why not stay a little and take a look at some of my projects or if you're feeling adventurous send me a message.
-
+						Looks like you made it to this site somehow. Why not stay a little and take a look at some of my projects or if you're feeling adventurous send me a message. <br>
+						Most of my content is either programming or gaming related so don't expect too much fancy stuff
 					</div>
 				</div>
-				<div class="mdl-cell mdl-cell--2-col space-side"></div>
+
+				<div class="mdl-cell mdl-cell--2-col"></div>
+			</div>	
+
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--2-col"></div>
+
+				<div class="mdl-cell mdl-cell--8-col">
+					<div class="mdl-grid">
+						<div class="mdl-cell mdl-cell--4-col">
+
+							<div class="mdl-cell mdl-cell--4-col card-jeb mdl-card info-card mdl-shadow--2dp">
+								<div class="mdl-card__title mdl-card--expand">
+									<h2 class="mdl-card__title-text">JustEnoughButtons</h2>
+								</div>
+								<div class="mdl-card__supporting-text">
+									Adds utility buttons to Minecraft's inventory screen
+								</div>
+								<div class="mdl-card__actions mdl-card--border">
+									<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/JustEnoughButtons" target="_blank">
+										View source
+									</a>
+								</div>
+							</div>	
+						</div>
+
+						<div class="mdl-cell mdl-cell--4-col">
+
+							<div class="mdl-cell mdl-cell--4-col card-mpdq info-card mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title mdl-card--expand">
+									<h2 class="mdl-card__title-text">mpdq</h2>
+								</div>
+								<div class="mdl-card__supporting-text">
+									Control MediaPlayerDaemon over your taskbar
+								</div>
+								<div class="mdl-card__actions mdl-card--border">
+									<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/mpdq" target="_blank">
+										View source
+									</a>
+								</div>
+							</div>	
+						</div>
+
+						<div class="mdl-cell mdl-cell--4-col">
+							<div class="mdl-cell mdl-cell--4-col blog-card info-card mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title mdl-card--expand">
+									<h2 class="mdl-card__title-text">Blog</h2>
+								</div>
+								<div class="mdl-card__supporting-text">
+									Wordpress page with random things that come to my mind
+								</div>
+								<div class="mdl-card__actions mdl-card--border">
+									<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://universallp.wordpress.com" target="_blank">
+										Read more
+									</a>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+
+				<div class="mdl-cell mdl-cell--2-col"></div>
 			</div>
-
-
 		</main>
 
 
 		<div class="main-footer">
 			<footer class="mdl-mini-footer">
 				<div class="mdl-mini-footer__left-section">
-					<div class="mdl-logo">Title</div>
+					<div class="mdl-logo">universal</div>
 					<ul class="mdl-mini-footer__link-list">
+						<li><a href="https://getmdl.io/index.html">Powered by MDL</a></li>
 						<li><a href="#">Help</a></li>
-						<li><a href="#">Privacy & Terms</a></li>
+						<li><a href="#">Privacy &amp; Terms</a></li>
 					</ul>
 				</div>
 			</footer>
