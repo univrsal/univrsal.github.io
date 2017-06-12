@@ -1,13 +1,15 @@
-.demo-layout-transparent {
-  background: url('img/header.jpg') center / cover;
-}
-.demo-layout-transparent .mdl-layout__header,
-.demo-layout-transparent .mdl-layout__drawer-button {
-  /* This background is dark, so we set text to white. Use 87% black instead if
-     your background is light. */
-  color: white;
+.head-link-icon {
+	width: 25px;
+	padding: 5px;
 }
 
-.header-main {
-	height: 40%;
+.body-head {
+	font-family: 'Open Sans', sans-serif;
+	font-style: bold;
+}
+
+.body-text {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	text-align: justify;
 }
