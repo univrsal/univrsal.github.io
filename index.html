@@ -12,7 +12,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
 
-	<title>universal - Home</title>
+	<title>universal</title>
 	<link rel="stylesheet" href="./css/main.css">
 	<script src="./js/main.js"></script>
 	<link rel="shortcut icon" href="./assets/img/favicon-alpha.ico" />
@@ -20,8 +20,7 @@
 <body>
 
 	<style>
-		.main-container {
-		}
+
 		.main-container .mdl-layout__header,
 		.main-container .mdl-layout__drawer-button {
 			color: white;
@@ -34,21 +33,9 @@
 			box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 		}
 
-		.main-grid {
-			width: 100%;
-		}
-
-		.space-side {
-			width: 20%;
-			margin: 0px;
-		}
-
-		.text-middle {
-			width: 60%;
-			margin: 0px;
-		}
-
 		.main-footer {
+			padding-top: 10px;
+			padding-bottom: 10px;
 			-webkit-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 			-moz-box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
 			box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.75);
@@ -74,6 +61,11 @@
 			color: #424242;
 			background:
 			url('./assets/img/blog.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.mdl-card {
+			max-width: 70%;
+			margin: 5px auto;
 		}
 	</style>
 
@@ -143,6 +135,67 @@
 				<div class="mdl-cell mdl-cell--2-col"></div>
 			</div>	
 
+
+			<div class="mdl-grid">
+				
+				<div class="mdl-cell mdl-cell--2-col"></div>
+
+				<div class="mdl-cell mdl-cell--8-col">
+					
+					<div class="mdl-grid">
+						
+						<div class="mdl-cell mdl-cell--4-col card-jeb mdl-card info-card mdl-shadow--2dp">
+							<div class="mdl-card__title mdl-card--expand">
+								<h2 class="mdl-card__title-text">JustEnoughButtons</h2>
+							</div>
+							<div class="mdl-card__supporting-text">
+								Adds utility buttons to Minecraft's inventory screen
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/JustEnoughButtons" target="_blank">
+									View source
+								</a>
+							</div>
+						</div>
+
+						<div class="mdl-cell mdl-cell--4-col card-mpdq info-card mdl-card mdl-shadow--2dp">
+							<div class="mdl-card__title mdl-card--expand">
+								<h2 class="mdl-card__title-text">mpdq</h2>
+							</div>
+							<div class="mdl-card__supporting-text">
+								Control MediaPlayerDaemon over your taskbar
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/mpdq" target="_blank">
+									View source
+								</a>
+							</div>
+						</div>
+
+						<div class="mdl-cell mdl-cell--4-col blog-card info-card mdl-card mdl-shadow--2dp">
+							<div class="mdl-card__title mdl-card--expand">
+								<h2 class="mdl-card__title-text">Blog</h2>
+							</div>
+							<div class="mdl-card__supporting-text">
+								Wordpress page with random things that come to my mind
+							</div>
+							<div class="mdl-card__actions mdl-card--border">
+								<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://universallp.wordpress.com" target="_blank">
+									Read more
+								</a>
+							</div>
+						</div>	
+						
+
+					</div>
+
+				</div>
+
+				<div class="mdl-cell mdl-cell--2-col"></div>
+
+			</div>
+
+			<!--
 			<div class="mdl-grid">
 				<div class="mdl-cell mdl-cell--2-col"></div>
 
@@ -202,21 +255,19 @@
 
 				<div class="mdl-cell mdl-cell--2-col"></div>
 			</div>
-		</main>
+		-->
+	</main>
 
-
-		<div class="main-footer">
-			<footer class="mdl-mini-footer">
-				<div class="mdl-mini-footer__left-section">
-					<div class="mdl-logo">universal</div>
-					<ul class="mdl-mini-footer__link-list">
-						<li><a href="https://getmdl.io/index.html">Powered by MDL</a></li>
-						<li><a href="#">Help</a></li>
-						<li><a href="#">Privacy &amp; Terms</a></li>
-					</ul>
-				</div>
-			</footer>
+	<footer class="mdl-mini-footer main-footer">
+		<div class="mdl-mini-footer__left-section">
+			<div class="mdl-logo">universal</div>
+			<ul class="mdl-mini-footer__link-list">
+				<li><a href="https://getmdl.io/index.html" target="_blank">Powered by MDL</a></li>
+				<li><a href="#">Help</a></li>
+				<li><a href="#">Privacy &amp; Terms</a></li>
+			</ul>
 		</div>
-	</div>
+	</footer>
+</div>
 </body>
 </html>
