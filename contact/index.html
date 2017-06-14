@@ -13,11 +13,83 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
 
 	<title>universal - contact</title>
-	<link rel="stylesheet" href="./css/main.css">
-	<script src="./js/main.js"></script>
-	<link rel="shortcut icon" href="./assets/img/favicon-alpha.ico" />
+
+	<link rel="shortcut icon" href="../assets/img/favicon-alpha.ico" />
 </head>
 <body>
-	<a> Test</a>
+
+	<style type="text/css">
+		
+		.mail-icon {
+			width: 50px;
+		}
+
+		.icon-link {
+			color: #212121;
+			text-decoration: none;
+			padding-top: 15px;
+			font-size: 14pt;
+		}
+
+		.divide-line {
+			margin: 10px;
+			height: 25px;
+			border-width: 1px;
+			color: #212121;
+			border-style: solid;
+		}
+	</style>
+	<div class="contact-container mdl-layout mdl-js-layout">
+		<header class="contact-heade mdl-layout__header mdl-layout__header--scroll">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+				<span class="mdl-layout-title">Contact</span>
+				<!-- Add spacer, to align navigation to the right -->
+				<div class="mdl-layout-spacer"></div>
+				<!-- Navigation -->
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" href="">Home</a>
+					<!--<a class="mdl-navigation__link" href="">Link</a>
+					<a class="mdl-navigation__link" href="">Link</a>
+					<a class="mdl-navigation__link" href="">Link</a> -->
+				</nav>
+			</div>
+		</header>
+
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">Title</span>
+			<nav class="mdl-navigation">
+				<a class="mdl-navigation__link" href="">Link</a>
+				<a class="mdl-navigation__link" href="">Link</a>
+				<a class="mdl-navigation__link" href="">Link</a>
+				<a class="mdl-navigation__link" href="">Link</a>
+			</nav>
+		</div>
+
+		<main class="mdl-layout__content">
+			<div class="mdl-grid main-grid">
+				<div class="mdl-cell mdl-cell--2-col"></div>
+
+				<div class="mdl-cell mdl-cell--8-col">
+					<h1>hi.</h1>
+					<h5>
+						If you want to send me a message or just say hello, there're multiple ways to do that:
+					</h5>
+
+					<nav class="mdl-navigation">
+						<a href="mailto:xunxixvxxxexrsxaxixxlxxpx@wxxxexbx.xdxex" onmouseover="this.href=this.href.replace(/x/g,'');"> 
+							<img class="mail-icon" src="../assets/img/mail.png">
+							<a class="icon-link"  href="mailto:xunxixvxxxexrsxaxixxlxxpx@wxxxexbx.xdxex" onmouseover="this.href=this.href.replace(/x/g,'');">Send me an email</a>
+						</a>
+
+						<a class="divide-line"></a>
+					</nav>
+				</div>
+
+				<div class="mdl-cell mdl-cell--2-col"></div>
+			</div>	
+
+		</main>
+	</div>
 </body>
 </html>
