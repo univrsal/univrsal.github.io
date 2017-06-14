@@ -1,3 +1,8 @@
+@font-face {
+	font-family: ow;
+	src: url(../assets/font/bignoodletoo.woff);
+}
+
 .link-image {
 	width: 25px;
 	padding: 5px;
@@ -18,22 +23,41 @@
 .body-text {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
-	text-align: justify;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #to-top-btn {
-    display: none; /* Hidden by default */
-    position: fixed; /* Fixed/sticky position */
-    bottom: 20px; /* Place the button at the bottom of the page */
-    right: 30px; /* Place the button 30px from the right */
-    z-index: 99; /* Make sure it does not overlap */
-    cursor: pointer; /* Add a mouse pointer on hover */
-    
+	display: none; /* Hidden by default */
+	position: fixed; /* Fixed/sticky position */
+	bottom: 20px; /* Place the button at the bottom of the page */
+	right: 30px; /* Place the button 30px from the right */
+	z-index: 99; /* Make sure it does not overlap */
+	cursor: pointer; /* Add a mouse pointer on hover */
+
 }
+
+.main-title {
+	font-family: ow;
+	text-shadow: 2px 2px 8px #000000;
+	font-size: 55px;
+}
+
+.main-text {
+	text-shadow: 2px 2px 8px #000000;
+	font-size: 20px;
+	line-height: 140%;
+}
+
 #discord-link {
 	cursor: pointer;
 }
 
 .btn-icon {
 	width: 32px;
+}
+
+.body-link {
+	text-decoration: none;
+	padding: 0px;
 }
