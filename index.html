@@ -20,6 +20,17 @@
 <body>
 
 	<style>
+		@font-face {
+			font-family: ow;
+			src: url(./assets/font/bignoodletoo.woff);
+		}
+
+		.main-title {
+			font-family: ow;
+			text-shadow: 2px 2px 8px #000000;
+			font-size: 55px;
+		}
+
 		.main-container .mdl-layout__header,
 		.main-container .mdl-layout__drawer-button {
 			color: gray;
@@ -29,9 +40,8 @@
 			height: 30%;
 		}
 
-		.main-grid{
+		.main-grid {
 			height: 100%;
-			padding: 0px;
 		}
 
 		.main-footer {
@@ -108,7 +118,14 @@
 		}
 	</style>
 
-	<div id="loader"></div> 
+	<div id="loader">
+		<div id="spinner"></div>
+		<noscript>
+			<div id="js-info">
+				You'll need javascript
+			</div>
+		</noscript>
+	</div> 
 
 	<div id="page">
 		<div class="main-container mdl-layout mdl-js-layout">
