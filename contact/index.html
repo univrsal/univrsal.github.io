@@ -14,6 +14,7 @@
 
 	<title>contact - universal</title>
 	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/contact.css">
 	<script src="../js/main.js"></script>
 	<link rel="shortcut icon" href="../assets/img/favicon-alpha.ico" />
 </head>
@@ -126,9 +127,14 @@
 		.contact-list > li > a {
 			font-family: 'Open Sans', sans-serif;
 			font-size: 20px;
-			padding-right: 20px;
-			text-decoration: none;
+			font-style: italic;
 			color: white;
+			text-decoration: none;
+		}
+
+		.contact-list > li > .spacer {
+			margin-left: 10px;
+			margin-right: 10px;
 		}
 	</style>
 
@@ -204,9 +210,12 @@
 						</div>
 						<div class="main-text">
 							<ul class="contact-list">
-								<li> <a href="https://twitter.com/univrsal_" target="_blank">Twitter</a> </li>
+								<li> <a href="https://twitter.com/univrsal_" target="_blank">Twitter</a></li>
+								<li> <a class="spacer">//</a> </li>
 								<li> <a href="http://steamcommunity.com/id/univrsal/" target="_blank">Steam</a> </li>
+								<li> <a class="spacer">//</a> </li>
 								<li> <a id ="discord-link" onclick="showToast()">Discord </a> </li>
+								<li> <a class="spacer">//</a> </li>
 								<li> <a href="mailto:xunxixvxxxexrsxaxixxlxxpx@wxxxexbx.xdxex" onmouseover="this.href=this.href.replace(/x/g,'');">Email</a> </li>
 							</ul>
 						</div>
