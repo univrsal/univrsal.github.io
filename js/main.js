@@ -14,5 +14,5 @@ function show(id, value) {
 
 onReady(function () {
     show('loader', false);
-    show('page', true);
+    //show('page', true);
 });
