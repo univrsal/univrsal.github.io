@@ -64,7 +64,7 @@
 			margin-right: 5px;
 		}
 
-		.quick-links > ul > li > a { 
+		.quick-links > ul > li > a, .config-btn { 
 			font-family: monospace;
 			color: #9ee2ff;
 			text-decoration: none;
@@ -74,12 +74,74 @@
 		.center-container > img {
 			-webkit-filter: drop-shadow(0 0 10px rgba(0,0,0,0.7));
 			vertical-align: middle;
-			z-index: -5;
+			z-index: -1;
 			width: 50%;
+		}
+
+		.config-btn {
+			cursor: pointer;
+		}
+
+		.configbar {
+			height: 100%;
+			width: 0px;
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			background-color: #292929;
+			overflow-x: hidden; 
+			padding-top: 60px;
+			transition: 0.5s; 
+			-webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+			-moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+		}
+
+		.configbar a, h3 {
+			font-family: monospace;
+			margin: 4px 4px 4px 32px;
+			text-decoration: none;
+			font-size: 14px;
+			color: #818181;
+			transition: 0.3s
+		}
+
+		.configbar h3 {
+			font-size: 18px;
+			margin-bottom: 20px;
+			font-weight: normal;
+		}
+
+		@media screen and (max-height: 450px) {
+			.sidenav {padding-top: 15px;}
+			.sidenav a {font-size: 18px;}
+		}
+
+		.config-text {
+			background-color: #292929;
+			border-style: solid;
+			border-width: 0px 0px 1px 0px;
+			font-family: monospace;
+			font-size: 14px;
+			color: white;
+			width: 70%;
+			padding: 4px;
+			margin: 8px 8px 8px 32px;
+		}
+
+		.save-btn {
+			color: white;
+			cursor: pointer;
+			padding: 3px 10px 3px 10px;
+			border-width: 1px;
+			border-style: solid;
 		}
 	</style>
 
 	<script type="text/javascript">
+		var cfg_visible = false;
+
 		function setCookie(cname, cvalue) {
 			document.cookie = cname + "=" + cvalue + ";path=/";
 		}
@@ -100,23 +162,35 @@
 			return "";
 		}
 
-		function setLogo() {
+		function setLogo(path) {
+			var img = document.getElementById("head-logo");
+			img.src = path;
+		}
+
+		function updateLogo() {
 
 		}
 
-		var img_path = getCookie("image_path");
-
-		if (img_path === "") {
-			img_path = "../assets/img/search-logo.png";
+		function setConfig(id, val) {
+			var textField = document.getElementById(id);
+			if (textField !== null)
+				textField.value = val;
 		}
-		console.log("Img path: " + img_path);
+
+		function toggleConfig() {
+			if (!cfg_visible) {
+				document.getElementById("sidebar").style.width = "250px";
+				cfg_visible = true;
+			} else {
+				document.getElementById("sidebar").style.width = "0";
+				cfg_visible = false;
+			}
+		}
 	</script>
 	<div class="main">
-
-		
 		<div class="center-container">
 			
-			<img class="search-img" src="../assets/img/search-logo.png">
+			<img class="search-img" id="head-logo" alt="Here should be a logo for your start page. Maybe you changed the path to an invalid file. Click cfg to change the path" src="../assets/img/search-logo.png">
 			<form class="search-form" action="https://duckduckgo.com/">
 				<input class="search-text" type="text" name="q">
 			</form>
@@ -126,11 +200,55 @@
 					<li><a href="https://reddit.com/" target="_blank">reddit</a></li>
 					<li><a href="https://soundcloud.com" target="_blank">sc</a></li>
 					<li><a href="https://imgur.com" target="_blank">imgur</a></li>
-					
+					<li><a class="config-btn" onclick="toggleConfig()">cfg</a></li>
 				</ul>
 			</div> 
 		</div>
+
+		<div id="sidebar" class="configbar">
+			<h3>Configure this screen</h3>
+			<a>Search logo path:</a>
+			<input type="text" class="config-text" id="logo-value"/>
+			<a>Background path:</a>
+			<input type="text" class="config-text" id="bg-value"/>
+
+			<a class="save-btn" onclick="applyConfig()">Save</a>
+		</div>
 	</div>
 
+	<script type="text/javascript">
+		// initialize config of search screen
+
+		var img_path = getCookie("image_path");
+		var bg_path  = getCookie("bg_path");
+		
+		if (img_path === "") img_path = "../assets/img/search-logo.png";
+		if (bg_path === "") bg_path = "null";
+		
+		function applyConfig() {
+			img_path = document.getElementById("logo-value").value;
+			bg_path = document.getElementById("bg-value").value;
+			
+			setCookie("image_path", img_path);
+			setCookie("bg_path", bg_path);	
+			
+			if (img_path == "")
+				img_path = "../assets/img/search-logo.png";
+
+			if (img_path !== "../assets/img/search-logo.png")
+				setLogo("file:///" + img_path);
+			else
+				setLogo(img_path);
+			
+			if (bg_path !== "null") {
+
+			}
+		}
+
+		setConfig('logo-value', img_path);
+		setConfig('bg-value', bg_path);
+
+		applyConfig();
+	</script>
 </body>
 </html>
