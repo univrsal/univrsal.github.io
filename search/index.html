@@ -12,11 +12,9 @@
 <body id="body">
 	<style type="text/css">
 		.search-text {
-			background-color: #292929;
 			border-style: none;
 			font-family: monospace;
 			font-size: 18px;
-			color: white;
 			width: 100%;
 			padding-top: 8px;
 			padding-bottom: 8px;
@@ -69,7 +67,7 @@
 			margin-right: 5px;
 		}
 
-		.quick-links > ul > li > a, .config-btn { 
+		.ql, .config-btn { 
 			font-family: monospace;
 			color: #9ee2ff;
 			text-decoration: none;
@@ -89,12 +87,11 @@
 
 		.configbar {
 			height: 100%;
-			width: 250px;
+			width: 0px;
 			position: fixed;
 			z-index: 1;
 			top: 0;
 			left: 0;
-			background-color: #292929;
 			overflow-x: hidden; 
 			padding-top: 60px;
 			transition: 0.5s; 
@@ -103,16 +100,15 @@
 			box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 		}
 
-		.configbar a, h3 {
+		.config-values a, h3 {
 			font-family: monospace;
 			margin: 4px 4px 4px 32px;
 			text-decoration: none;
 			font-size: 14px;
-			color: #818181;
 			transition: 0.3s
 		}
 
-		.configbar h3 {
+		.config-values h3 {
 			font-size: 18px;
 			margin-bottom: 20px;
 			font-weight: normal;
@@ -124,28 +120,16 @@
 		}
 
 		.config-text {
-			background-color: #292929;
 			border-style: solid;
 			border-width: 0px 0px 1px 0px;
 			font-family: monospace;
 			font-size: 14px;
-			color: white;
-			width: 70%;
-			padding: 4px;
+			width: 80%;
 			margin: 8px 8px 8px 32px;
-		}
-
-		.save-btn {
-			color: white;
-			cursor: pointer;
-			padding: 3px 10px 3px 10px;
-			border-width: 1px;
-			border-style: solid;
 		}
 
 		.color-input {
 			margin: 8px 8px 8px 32px;
-
 		}
 
 		.config-color {
@@ -165,15 +149,12 @@
 			cursor: pointer;
 		}
 
-
 		.config-color-hex {
 			font-family: monospace;
 			width: auto;
-			color: white;
 			border-style: solid;
 			display: inline;
 			border-width: 0px 0px 1px 0px;
-			background-color: #292929;
 		}
 
 		.hidden {
@@ -183,6 +164,29 @@
 			width: 1px;
 			height: 1px;
 			overflow: hidden;
+		}
+
+		.cfg-buttons {
+			padding-top: 5px;
+			margin: 4px 4px 4px 32px;
+		}
+
+		.cfg-btn {
+			font-family: monospace;
+			font-size: 14px;
+			cursor: pointer;
+			padding: 3px 10px 3px 10px;
+			border-width: 1px;
+			border-style: solid;
+			margin: 0px;
+		}
+
+		.text {
+			color: white;
+		}
+
+		.accent-color {
+			background-color: #292929;
 		}
 	</style>
 
@@ -214,12 +218,32 @@
 			img.src = path;
 		}
 
-		function setColor(tag, c) {
-			var elements = document.getElementsByClassName(tag);
+		function setColorByClass(className, c) {
+			var elements = document.getElementsByClassName(className);
 			var i;
-		
+
 			for (i = 0; i < elements.length; i++) {
 				elements[i].style.color = c;
+			} 
+		}
+
+		function setBGColorByTag(tag, c) {
+			var tags = document.getElementsByTagName(tag);
+			var i;
+			
+			for (i = 0; i < tags.length; i++) {
+				tags[i].style.backgroundColor = c;
+				console.log(tag.concat(": ").concat(tags[i]).concat(", ").concat(c));
+
+			}
+		}
+
+		function setBGColorByClass(className, c) {
+			var elements = document.getElementsByClassName(className);
+			var i;
+
+			for (i = 0; i < elements.length; i++) {
+				elements[i].style.backgroundColor = c;
 			} 
 		}
 
@@ -246,15 +270,15 @@
 			}
 		}
 
-		function onPickLinkColor(color, textBoxId, panelId) {
+		function onPickColor(color, textBoxId, panelId) {
 			var linkColorTextbox = document.getElementById(textBoxId);
 			linkColorTextbox.value = color;
 			document.getElementById(panelId).style.backgroundColor = color;
 		}
 
-		function selectColor(dialogId) {
+		function selectColor(dialogId, valueId) {
 			document.getElementById(dialogId).focus();
-			document.getElementById(dialogId).value = document.getElementById("link-color-hex").value;
+			document.getElementById(dialogId).value = document.getElementById(valueId).value;
 			document.getElementById(dialogId).click();
 		}
 	</script>
@@ -263,7 +287,7 @@
 			
 			<img class="search-img" id="head-logo" alt="Here should be a logo for your start page. Maybe you changed the path to an invalid file. Click cfg to change the path" src="../assets/img/search-logo.png">
 			<form class="search-form" action="https://duckduckgo.com/">
-				<input class="search-text" type="text" name="q">
+				<input class="search-text text accent-color" type="text" id="searchbox" name="q">
 			</form>
 			<div class="quick-links">
 				<ul>
@@ -276,62 +300,136 @@
 			</div>
 		</div>
 
-		<div id="sidebar" class="configbar">
-			<h3>Configure this screen</h3>
-			<a>Search logo link:</a>
-			<input type="text" class="config-text" id="logo-value"/>
-			<a>Background link:</a>
-			<input type="text" class="config-text" id="bg-value"/>
-			<a>Quick link color:</a>
-			<div class="color-input">
-				<input type="color" onchange="onPickLinkColor(this.value, 'link-color-hex', 'link-color-panel')" class="hidden" id="link-color-value"/>
-				<div class="color-panel" id="link-color-panel" onclick="selectColor('link-color-value')"></div>
-				<input type="text" onkeypress="onPickLinkColor(this.value, 'link-color-hex', 'link-color-panel')" class="config-color-hex" id="link-color-hex"/>
+		<div id="sidebar" class="configbar accent-color">
+			<div class="config-values">
+				<h3 class="text">Configure this screen</h3>
+
+				<a class="text">Search logo link:</a>
+				<input type="text" class="config-text text accent-color" id="logo-value"/>
+
+				<a class="text">Background link:</a>
+				<input type="text" class="config-text text accent-color" id="bg-value"/>
+
+				<a class="text">Quick link color:</a>
+				<div class="color-input">
+					<input type="color" onchange="onPickColor(this.value, 'link-color-hex', 'link-color-panel')" class="hidden" id="link-color-value"/>
+					<div class="color-panel" title="Click to select color" onclick="selectColor('link-color-value', 'link-color-hex')" id="link-color-panel" ></div>
+					<input type="text" onkeypress="onPickColor(this.value, 'link-color-hex', 'link-color-panel')" class="config-color-hex text accent-color" id="link-color-hex"/>
+				</div>
+
+
+				<a class="text">Text color:</a>
+				<div class="color-input">
+					<input type="color" onchange="onPickColor(this.value, 'text-color-hex', 'text-color-panel')" class="hidden" id="text-color-value"/>
+					<div class="color-panel" title="Click to select color" onclick="selectColor('text-color-value', 'text-color-hex')" id="text-color-panel" ></div>
+					<input type="text" onkeypress="onPickColor(this.value, 'text-color-hex', 'text-color-panel')" class="config-color-hex text accent-color" id="text-color-hex"/>
+				</div>
+
+				<a class="text">Background color:</a>
+				<div class="color-input">
+					<input type="color" onchange="onPickColor(this.value, 'bg-color-hex', 'bg-color-panel')" class="hidden" id="bg-color-value"/>
+					<div class="color-panel" title="Click to select color" onclick="selectColor('bg-color-value', 'bg-color-hex')" id="bg-color-panel" ></div>
+					<input type="text" onkeypress="onPickColor(this.value, 'bg-color-hex', 'bg-color-panel')" class="config-color-hex text accent-color" id="bg-color-hex"/>
+				</div>
+
+				<a class="text">Accent color:</a>
+				<div class="color-input">
+					<input type="color" onchange="onPickColor(this.value, 'accent-color-hex', 'accent-color-panel')" class="hidden" id="accent-color-value"/>
+					<div class="color-panel" title="Click to select color" onclick="selectColor('accent-color-value', 'accent-color-hex')" id="accent-color-panel" ></div>
+					<input type="text" onkeypress="onPickColor(this.value, 'accent-color-hex', 'accent-color-panel')" class="config-color-hex text accent-color" id="accent-color-hex"/>
+				</div>
+
 			</div>
 
-			<a class="save-btn" onclick="applyConfig()">Save</a>
+			<div class="cfg-buttons">
+				<a class="cfg-btn text" onclick="applyConfig(false)">Save</a>
+				<a class="cfg-btn text" onclick="applyConfig(true)">Reset</a>
+			</div>
 		</div>
 	</div>
 
 	<script type="text/javascript">
+		var debug = false;
+
+		if (debug) {
+			document.getElementById("sidebar").style.width = "250px";
+		}
 		// initialize config of search screen
 
 		var img_path = getCookie("image_path");
 		var bg_path  = getCookie("bg_path");
 		var link_color = getCookie("link_color");
+		var bg_color = getCookie("bg_color");
+		var accent_color = getCookie("accent_color");
+		var text_color = getCookie("text_color");
 
 		if (img_path === "") img_path = "../assets/img/search-logo.png";
 		if (bg_path === "") bg_path = "null";
 		if (link_color === "") link_color = "#9ee2ff";
+		if (bg_color === "") bg_color = "#333333";
+		if (accent_color === "") accent_color = "#292929";
+		if (text_color === "") text_color = "#ffffff";
 
-		function applyConfig() {
-			// Load values
-			img_path = document.getElementById("logo-value").value;
-			bg_path = document.getElementById("bg-value").value;
-			link_color = document.getElementById("link-color-hex").value;
+		function resetValues() {
+			img_path = "../assets/img/search-logo.png";
+			bg_path = "null";
+			link_color = "#9ee2ff";
+			bg_color = "#333333";
+			accent_color = "#292929";
+			text_color = "#ffffff";
+		}
+
+		function setValues() {
+			// Apply loaded values to config screen
+			setConfig('logo-value', img_path);
+			setConfig('bg-value', bg_path);
+			onPickColor(link_color, 'link-color-hex', 'link-color-panel')
+			onPickColor(bg_color, 'bg-color-hex', 'bg-color-panel');
+			onPickColor(accent_color, 'accent-color-hex', 'accent-color-panel');
+			onPickColor(text_color, 'text-color-hex', 'text-color-panel');
+
+		}
+
+		function applyConfig(reset) {
+
+			if (!reset) {
+				// Load values
+				img_path = document.getElementById("logo-value").value;
+				bg_path = document.getElementById("bg-value").value;
+				link_color = document.getElementById("link-color-hex").value;
+				bg_color = document.getElementById("bg-color-hex").value;
+				accent_color = document.getElementById("accent-color-hex").value;
+				text_color = document.getElementById("text-color-hex").value;		
+			} else {
+				resetValues();
+			}
 
 			// Set cookies
 			setCookie("image_path", img_path);
 			setCookie("bg_path", bg_path);
 			setCookie("link_color", link_color);
-			
+			setCookie("bg_color", bg_color);
+			setCookie("accent_color", accent_color);
+			setCookie("text_color", text_color);
+
 			// Apply values
 			if (img_path == "")
 				img_path = "../assets/img/search-logo.png";
 
 			setLogo(img_path);
 			
-			if (bg_path !== "null") {
-				setBackground(bg_path);
-			}
+			setBackground(bg_path);
 
-			setColor("ql", link_color);
+			setColorByClass("ql", link_color);
+			setColorByClass("text", text_color);
+			setBGColorByClass("accent-color", accent_color);
+			setColorByClass("text", text_color);
+			setBGColorByTag("body", bg_color);
+
+			if (reset) setValues();
 		}
 
-		setConfig('logo-value', img_path);
-		setConfig('bg-value', bg_path);
-		onPickLinkColor(link_color, 'link-color-hex', 'link-color-panel')
-			
+		setValues();
 		applyConfig();
 	</script>
 </body>
