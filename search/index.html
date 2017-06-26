@@ -11,18 +11,25 @@
 
 <body id="body">
 	<style type="text/css">
-		.search-text {
-			border-style: none;
-			font-family: monospace;
-			font-size: 18px;
-			width: 100%;
-			padding-top: 8px;
-			padding-bottom: 8px;
-			padding-left: 8px;
 
+		.search-box{
 			-webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 			-moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 			box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+			text-align: left;
+		}
+
+		.search-form {
+			
+		}
+
+		.search-text {
+			overflow: hidden;
+			border-style: none;
+			font-family: monospace;
+			width: 80%;
+			font-size: 18px;
+			margin: 8px;
 		}
 
 		body {
@@ -54,11 +61,9 @@
 
 		.engine-list {
 			list-style: none;
-			right: -85px;
-			top: 147px;
-			padding: 0px;
-			position: absolute;
 			float: right;
+			margin: 4px;
+			padding: 0;
 		}
 
 		.engine-list li {
@@ -67,13 +72,13 @@
 
 		.search-engine {
 			width: 30px;
-			-webkit-filter: drop-shadow(0 0 5px rgba(0,0,0,0.7)) grayscale(100%);
+			-webkit-filter: grayscale(100%);
 			cursor: pointer;
 			transition: 0.7s
 		}
 
 		.engine-selected {
-			-webkit-filter: drop-shadow(0 0 5px rgba(0,0,0,0.7)) grayscale(0%);
+			-webkit-filter: grayscale(0%);
 			transition: 0.7s
 		}
 
@@ -244,6 +249,7 @@
 		}
 
 		function setEngine(engineUrl, buttonId, otherButtonId) {
+			setCookie("engine_url", engineUrl);
 			var search_box = document.getElementById("search-formular");
 			var selectedButton = document.getElementById(buttonId);
 			var otherButton = document.getElementById(otherButtonId);
@@ -262,7 +268,6 @@
 			var elements = document.getElementsByClassName(className);
 			var i;
 			for (i = 0; i < elements.length; i++) {
-				console.log("classname: ".concat(className).concat(", ").concat(elements[i]).concat(", ").concat(c));
 				elements[i].style.color = c;
 			} 
 		}
@@ -357,9 +362,18 @@
 			
 			<img class="search-img" id="head-logo" alt="Here should be a logo for your start page. Maybe you changed the path to an invalid file. Click cfg to change the path" src="../assets/img/search-logo.png">
 
-			<form class="search-form" id="search-formular" action="https://duckduckgo.com/">
-				<input class="search-text text accent-color" type="text" id="searchbox" name="q">
-			</form>
+			<div class="search-box">
+
+				<form class="accent-color search-form" id="search-formular" action="https://duckduckgo.com/">
+					<ul class="engine-list">
+						<li><img title="Search via duckduckgo.com" id="ddg-engine" class="search-engine engine-selected" src="../assets/img/ddg.png" onclick="setEngine('duckduckgo.com', 'ddg-engine', 'google-engine')"></img></li>
+						<li><img title="Search via duckduckgo.com" id="google-engine" class="search-engine" src="../assets/img/google.png" onclick="setEngine('google.com/search', 'google-engine', 'ddg-engine')"></img></li>
+					</ul> 
+					<input class="search-text text accent-color" type="text accent-color" id="searchbox" name="q">
+				</form> 
+
+			</div>
+
 
 			<div class="quick-links">
 				<ul id="ql-list">
@@ -371,10 +385,7 @@
 				</ul>
 			</div>
 
-			<ul class="engine-list">
-				<li><img id="ddg-engine" class="search-engine engine-selected" src="../assets/img/ddg.png" onclick="setEngine('duckduckgo.com', 'ddg-engine', 'google-engine')"></img></li>
-				<li><img id="google-engine" class="search-engine" src="../assets/img/google.png" onclick="setEngine('google.com/search', 'google-engine', 'ddg-engine')"></img></li>
-			</ul>
+
 		</div>
 
 		<div id="sidebar" class="configbar accent-color">
@@ -452,7 +463,7 @@
 		if (text_color === "") text_color = "#ffffff";
 		if (quick_link_string === "") quick_link_string = "yt\nhttps://www.youtube.com/feed/subscriptions\nreddit\nhttps://reddit.com/\nsc\nhttps://soundcloud.com/\nimgur\nhttps://imgur.com/";
 		if (engine_url === "") engine_url="duckduckgo.com";
-
+	
 		function resetValues() {
 			img_path = "../assets/img/search-logo.png";
 			bg_path = "null";
@@ -473,7 +484,13 @@
 			onPickColor(accent_color, 'accent-color-hex', 'accent-color-panel');
 			onPickColor(text_color, 'text-color-hex', 'text-color-panel');
 			setConfig('ql-value', quick_link_string);
-			setEngine(engine_url);
+
+			if (engine_url === "duckduckgo.com") {
+				setEngine(engine_url, 'ddg-engine', 'google-engine');
+			} else {
+				setEngine(engine_url, 'google-engine', 'ddg-engine');
+			}
+			
 		}
 
 		function applyConfig(reset) {
