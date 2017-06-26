@@ -17,6 +17,8 @@
 			-moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 			box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 			text-align: left;
+			border: 2px solid;
+			border-radius: 3px;
 		}
 
 		.search-form {
@@ -278,6 +280,7 @@
 			
 			for (i = 0; i < tags.length; i++) {
 				tags[i].style.backgroundColor = c;
+				tags[i].style.borderColor = c;
 			}
 		}
 
@@ -290,11 +293,19 @@
 			} 
 		}
 
+		function setBorderColorByClass(className, c) {
+			var elements = document.getElementsByClassName(className);
+			var i;
+
+			for (i = 0; i < elements.length; i++) {
+				elements[i].style.borderColor = c;
+			} 
+		}
+
 		function setBackground() {
 			var bg_link = "url('".concat(bg_path).concat("') no-repeat center center fixed");
 			var body = document.getElementById("body");
 			body.style.background = bg_link;
-			//body.style.background-repeat = "no-repeat";
 		}
 
 		function setConfig(id, val) {
@@ -362,7 +373,7 @@
 			
 			<img class="search-img" id="head-logo" alt="Here should be a logo for your start page. Maybe you changed the path to an invalid file. Click cfg to change the path" src="../assets/img/search-logo.png">
 
-			<div class="search-box">
+			<div class="search-box accent-border-color">
 
 				<form class="accent-color search-form" id="search-formular" action="https://duckduckgo.com/">
 					<ul class="engine-list">
@@ -535,11 +546,10 @@
 			setColorByClass("ql", link_color);
 			setColorByClass("text", text_color);
 			setBGColorByClass("accent-color", accent_color);
+			setBorderColorByClass("accent-border-color", accent_color);
 			setColorByClass("text", text_color);
 			setBGColorByTag("body", bg_color);
 
-
-			
 
 			if (reset) setValues();
 		}
