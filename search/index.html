@@ -52,6 +52,31 @@
 			text-align: center;
 		}
 
+		.engine-list {
+			list-style: none;
+			right: -85px;
+			top: 147px;
+			padding: 0px;
+			position: absolute;
+			float: right;
+		}
+
+		.engine-list li {
+			display: inline;
+		}
+
+		.search-engine {
+			width: 30px;
+			-webkit-filter: drop-shadow(0 0 5px rgba(0,0,0,0.7)) grayscale(100%);
+			cursor: pointer;
+			transition: 0.7s
+		}
+
+		.engine-selected {
+			-webkit-filter: drop-shadow(0 0 5px rgba(0,0,0,0.7)) grayscale(0%);
+			transition: 0.7s
+		}
+
 		.quick-links > ul {
 			list-style: none;
 			margin: 5px;
@@ -86,14 +111,14 @@
 		}
 
 		.configbar {
-			height: 100%;
+			bottom: 0;
 			width: 0px;
 			position: fixed;
 			z-index: 1;
 			top: 0;
 			left: 0;
 			overflow-x: hidden; 
-			padding-top: 60px;
+			padding-top: 10px;
 			transition: 0.5s; 
 			-webkit-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
 			-moz-box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
@@ -168,6 +193,7 @@
 
 		.cfg-buttons {
 			padding-top: 5px;
+			padding-bottom: 15px;
 			margin: 4px 4px 4px 32px;
 		}
 
@@ -183,6 +209,10 @@
 
 		.text {
 			color: white;
+		}
+
+		.text-area {
+			resize: vertical;
 		}
 
 		.accent-color {
@@ -213,6 +243,16 @@
 			return "";
 		}
 
+		function setEngine(engineUrl, buttonId, otherButtonId) {
+			var search_box = document.getElementById("search-formular");
+			var selectedButton = document.getElementById(buttonId);
+			var otherButton = document.getElementById(otherButtonId);
+
+			search_box.setAttribute("action", "https://".concat(engineUrl));
+			selectedButton.setAttribute("class", "search-engine engine-selected");
+			otherButton.setAttribute("class", "search-engine");
+		}
+
 		function setLogo(path) {
 			var img = document.getElementById("head-logo");
 			img.src = path;
@@ -221,8 +261,8 @@
 		function setColorByClass(className, c) {
 			var elements = document.getElementsByClassName(className);
 			var i;
-
 			for (i = 0; i < elements.length; i++) {
+				console.log("classname: ".concat(className).concat(", ").concat(elements[i]).concat(", ").concat(c));
 				elements[i].style.color = c;
 			} 
 		}
@@ -233,8 +273,6 @@
 			
 			for (i = 0; i < tags.length; i++) {
 				tags[i].style.backgroundColor = c;
-				console.log(tag.concat(": ").concat(tags[i]).concat(", ").concat(c));
-
 			}
 		}
 
@@ -281,36 +319,75 @@
 			document.getElementById(dialogId).value = document.getElementById(valueId).value;
 			document.getElementById(dialogId).click();
 		}
+
+		function rebuildLinks() {
+			var list = document.getElementById("ql-list");
+			list.innerHTML = "";
+			var li = document.createElement("li");
+			var a = document.createElement("a");
+			
+			a.appendChild(document.createTextNode("cfg"));
+			a.setAttribute("id", "config-li");
+			a.setAttribute("class", "ql config-btn");
+			a.setAttribute("onclick", "toggleConfig()");
+			
+			li.appendChild(a);
+			
+			var ql_split = quick_link_string.split("\n");
+
+			var tempLi, tempA;
+			for (var i = 0; i < ql_split.length; i += 2) {
+				tempLi = document.createElement("li");
+				tempA = document.createElement("a");
+
+				tempA.appendChild(document.createTextNode(ql_split[i]));
+				tempA.setAttribute("class", "ql");
+				tempA.setAttribute("href", ql_split[i + 1]);
+				tempA.setAttribute("target", "_blank");
+
+				tempLi.appendChild(tempA);
+				list.appendChild(tempLi);
+			}
+
+			list.appendChild(li);
+		}
 	</script>
 	<div class="main">
 		<div class="center-container">
 			
 			<img class="search-img" id="head-logo" alt="Here should be a logo for your start page. Maybe you changed the path to an invalid file. Click cfg to change the path" src="../assets/img/search-logo.png">
-			<form class="search-form" action="https://duckduckgo.com/">
+
+			<form class="search-form" id="search-formular" action="https://duckduckgo.com/">
 				<input class="search-text text accent-color" type="text" id="searchbox" name="q">
 			</form>
+
 			<div class="quick-links">
-				<ul>
+				<ul id="ql-list">
 					<li><a class="ql" href="https://www.youtube.com/feed/subscriptions" target="_blank">yt</a></li>
 					<li><a class="ql" href="https://reddit.com/" target="_blank">reddit</a></li>
 					<li><a class="ql" href="https://soundcloud.com" target="_blank">sc</a></li>
 					<li><a class="ql" href="https://imgur.com" target="_blank">imgur</a></li>
-					<li><a class="ql config-btn" onclick="toggleConfig()">cfg</a></li>
+					<li><a id="config-li" class="ql config-btn" onclick="toggleConfig()">cfg</a></li>
 				</ul>
 			</div>
+
+			<ul class="engine-list">
+				<li><img id="ddg-engine" class="search-engine engine-selected" src="../assets/img/ddg.png" onclick="setEngine('duckduckgo.com', 'ddg-engine', 'google-engine')"></img></li>
+				<li><img id="google-engine" class="search-engine" src="../assets/img/google.png" onclick="setEngine('google.com/search', 'google-engine', 'ddg-engine')"></img></li>
+			</ul>
 		</div>
 
 		<div id="sidebar" class="configbar accent-color">
 			<div class="config-values">
 				<h3 class="text">Configure this screen</h3>
 
-				<a class="text">Search logo link:</a>
+				<a class="text">Search logo link</a>
 				<input type="text" class="config-text text accent-color" id="logo-value"/>
 
-				<a class="text">Background link:</a>
+				<a class="text">Background link</a>
 				<input type="text" class="config-text text accent-color" id="bg-value"/>
 
-				<a class="text">Quick link color:</a>
+				<a class="text">Quick link color</a>
 				<div class="color-input">
 					<input type="color" onchange="onPickColor(this.value, 'link-color-hex', 'link-color-panel')" class="hidden" id="link-color-value"/>
 					<div class="color-panel" title="Click to select color" onclick="selectColor('link-color-value', 'link-color-hex')" id="link-color-panel" ></div>
@@ -318,7 +395,7 @@
 				</div>
 
 
-				<a class="text">Text color:</a>
+				<a class="text">Text color</a>
 				<div class="color-input">
 					<input type="color" onchange="onPickColor(this.value, 'text-color-hex', 'text-color-panel')" class="hidden" id="text-color-value"/>
 					<div class="color-panel" title="Click to select color" onclick="selectColor('text-color-value', 'text-color-hex')" id="text-color-panel" ></div>
@@ -332,13 +409,15 @@
 					<input type="text" onkeypress="onPickColor(this.value, 'bg-color-hex', 'bg-color-panel')" class="config-color-hex text accent-color" id="bg-color-hex"/>
 				</div>
 
-				<a class="text">Accent color:</a>
+				<a class="text">Accent color</a>
 				<div class="color-input">
 					<input type="color" onchange="onPickColor(this.value, 'accent-color-hex', 'accent-color-panel')" class="hidden" id="accent-color-value"/>
 					<div class="color-panel" title="Click to select color" onclick="selectColor('accent-color-value', 'accent-color-hex')" id="accent-color-panel" ></div>
 					<input type="text" onkeypress="onPickColor(this.value, 'accent-color-hex', 'accent-color-panel')" class="config-color-hex text accent-color" id="accent-color-hex"/>
 				</div>
 
+				<a class="text">Quick links</a>
+				<textarea cols="40" rows="3" class="config-text text text-area accent-color" id="ql-value"></textarea>
 			</div>
 
 			<div class="cfg-buttons">
@@ -349,7 +428,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var debug = false;
+		var debug = true;
 
 		if (debug) {
 			document.getElementById("sidebar").style.width = "250px";
@@ -362,6 +441,8 @@
 		var bg_color = getCookie("bg_color");
 		var accent_color = getCookie("accent_color");
 		var text_color = getCookie("text_color");
+		var quick_link_string = getCookie("quick_links").replace(/<br>/g, "\n");
+		var engine_url = getCookie("engine_url");
 
 		if (img_path === "") img_path = "../assets/img/search-logo.png";
 		if (bg_path === "") bg_path = "null";
@@ -369,6 +450,8 @@
 		if (bg_color === "") bg_color = "#333333";
 		if (accent_color === "") accent_color = "#292929";
 		if (text_color === "") text_color = "#ffffff";
+		if (quick_link_string === "") quick_link_string = "yt\nhttps://www.youtube.com/feed/subscriptions\nreddit\nhttps://reddit.com/\nsc\nhttps://soundcloud.com/\nimgur\nhttps://imgur.com/";
+		if (engine_url === "") engine_url="duckduckgo.com";
 
 		function resetValues() {
 			img_path = "../assets/img/search-logo.png";
@@ -377,6 +460,8 @@
 			bg_color = "#333333";
 			accent_color = "#292929";
 			text_color = "#ffffff";
+			quick_link_string = "yt\nhttps://www.youtube.com/feed/subscriptions\nreddit\nhttps://reddit.com/\nsc\nhttps://soundcloud.com/\nimgur\nhttps://imgur.com/";
+			engine_url="duckduckgo.com";
 		}
 
 		function setValues() {
@@ -387,7 +472,8 @@
 			onPickColor(bg_color, 'bg-color-hex', 'bg-color-panel');
 			onPickColor(accent_color, 'accent-color-hex', 'accent-color-panel');
 			onPickColor(text_color, 'text-color-hex', 'text-color-panel');
-
+			setConfig('ql-value', quick_link_string);
+			setEngine(engine_url);
 		}
 
 		function applyConfig(reset) {
@@ -399,7 +485,10 @@
 				link_color = document.getElementById("link-color-hex").value;
 				bg_color = document.getElementById("bg-color-hex").value;
 				accent_color = document.getElementById("accent-color-hex").value;
-				text_color = document.getElementById("text-color-hex").value;		
+				text_color = document.getElementById("text-color-hex").value;
+
+				quick_link_string = document.getElementById("ql-value").value;
+				
 			} else {
 				resetValues();
 			}
@@ -411,10 +500,16 @@
 			setCookie("bg_color", bg_color);
 			setCookie("accent_color", accent_color);
 			setCookie("text_color", text_color);
+			setCookie("engine_url", engine_url);
+			var tempCookie = quick_link_string.replace(/\n/g, "<br>");
+			setCookie("quick_links", tempCookie);
 
+			
 			// Apply values
 			if (img_path == "")
 				img_path = "../assets/img/search-logo.png";
+
+			rebuildLinks();
 
 			setLogo(img_path);
 			
@@ -425,6 +520,9 @@
 			setBGColorByClass("accent-color", accent_color);
 			setColorByClass("text", text_color);
 			setBGColorByTag("body", bg_color);
+
+
+			
 
 			if (reset) setValues();
 		}
