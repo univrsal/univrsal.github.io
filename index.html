@@ -24,7 +24,10 @@
 		var language = navigator.language || navigator.browserLanguage;
 
 		if (language === "de") {
-			document.location.href = './de/';
+			if (getCookie("no_redirect") !== "1") {
+				document.location.href = './de/';
+				setCookie("no_redirect", "1");	
+			}
 		}
 	</script>
 	<style>
