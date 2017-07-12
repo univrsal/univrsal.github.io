@@ -20,6 +20,13 @@
 </head>
 <body>
 
+	<script type="text/javascript">
+		var language = navigator.language || navigator.browserLanguage;
+
+		if (language === "de-DE") {
+			document.location.href = './de/';
+		}
+	</script>
 	<style>
 
 		.main-container .mdl-layout__header,
@@ -110,7 +117,7 @@
 			padding-left: 40px;
 			padding-right: 40px;
 			background: url('./assets/img/content.jpg') center / cover;
-	
+
 		}
 
 	</style>
