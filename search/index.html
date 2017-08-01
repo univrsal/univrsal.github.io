@@ -99,6 +99,11 @@
 			margin-right: 5px;
 		}
 
+		.divide {
+			margin-top: 7px;
+			margin-bottom: 7px;
+		}
+
 		.ql, .config-btn { 
 			font-family: monospace;
 			color: #9ee2ff;
@@ -134,7 +139,7 @@
 
 		.config-values a, h3 {
 			font-family: monospace;
-			margin: 4px 4px 4px 32px;
+			margin: 4px 4px 0px 32px;
 			text-decoration: none;
 			font-size: 14px;
 			transition: 0.3s
@@ -157,7 +162,7 @@
 			font-family: monospace;
 			font-size: 14px;
 			width: 80%;
-			margin: 8px 8px 8px 32px;
+			margin: 0px 8px 8px 32px;
 		}
 
 		.color-input {
@@ -183,7 +188,7 @@
 
 		.config-color-hex {
 			font-family: monospace;
-			width: auto;
+			width: 75%;
 			border-style: solid;
 			display: inline;
 			border-width: 0px 0px 1px 0px;
@@ -216,6 +221,10 @@
 
 		.text {
 			color: white;
+		}
+
+		.text-small {
+			font-size: 8px;
 		}
 
 		.text-area {
@@ -302,6 +311,20 @@
 			} 
 		}
 
+		function setFontByClass(className, f) {
+			var elements = document.getElementsByClassName(className);
+			var i;
+
+			for (i = 0; i < elements.length; i++) {
+				elements[i].style.font = f;
+			}
+		}
+
+		function setFontById(id, f) {
+			var element = document.getElementById(id);
+			element.style.font = f;
+		}
+
 		function setBackground() {
 			var bg_link = "url('".concat(bg_path).concat("') no-repeat center center fixed");
 			var body = document.getElementById("body");
@@ -367,6 +390,47 @@
 
 			list.appendChild(li);
 		}
+
+		function buildShareLink() {
+			var link = "";
+			link += img_path + "\\n";
+			link += bg_path + "\\n";
+			link += search_font + "\\n";
+			link += quick_link_font + "\\n";
+			link += link_color + "\\n";
+			link += text_color + "\\n";
+			link += bg_color + "\\n";
+			link += accent_color + "\\n";
+			link += getCookie("quick_links").replace(/<br>/g, "\\n")+ "\\n";
+			setConfig('share-value', link);
+		}
+
+		function loadLink() {
+			var link =  document.getElementById('share-value').value;
+			var entries = link.split("\\n");
+
+			img_path 		= entries[0];
+			bg_path 		= entries[1];
+			search_font 	= entries[2];
+			quick_link_font = entries[3];
+			link_color		= entries[4];
+			text_color		= entries[5];
+			bg_color		= entries[6];
+			accent_color	= entries[7];
+			
+			console.log(entries);
+			var text_box_text = "";
+
+			for (var i = 8; i < entries.length; i++) {
+				if (i < entries.length - 1)
+					text_box_text += entries[i].concat("\n");
+				else
+					text_box_text += entries[i];
+			}
+			quick_link_string = text_box_text;
+			setValues();
+			applyConfig(false);
+		}
 	</script>
 	<div class="main">
 		<div class="center-container">
@@ -409,6 +473,16 @@
 				<a class="text">Background link</a>
 				<input type="text" class="config-text text accent-color" id="bg-value"/>
 
+				<div class="divide accent-color"></div>
+
+				<a class="text">Search box font</a>
+				<input type="text" class="config-text text accent-color" id="sf-value"/>
+
+				<a class="text">Quick link font</a>
+				<input type="text" class="config-text text accent-color" id="qlf-value"/>
+
+				<div class="divide accent-color"></div>
+
 				<a class="text">Quick link color</a>
 				<div class="color-input">
 					<input type="color" onchange="onPickColor(this.value, 'link-color-hex', 'link-color-panel')" class="hidden" id="link-color-value"/>
@@ -424,7 +498,7 @@
 					<input type="text" onkeypress="onPickColor(this.value, 'text-color-hex', 'text-color-panel')" class="config-color-hex text accent-color" id="text-color-hex"/>
 				</div>
 
-				<a class="text">Background color:</a>
+				<a class="text">Background color</a>
 				<div class="color-input">
 					<input type="color" onchange="onPickColor(this.value, 'bg-color-hex', 'bg-color-panel')" class="hidden" id="bg-color-value"/>
 					<div class="color-panel" title="Click to select color" onclick="selectColor('bg-color-value', 'bg-color-hex')" id="bg-color-panel" ></div>
@@ -438,8 +512,16 @@
 					<input type="text" onkeypress="onPickColor(this.value, 'accent-color-hex', 'accent-color-panel')" class="config-color-hex text accent-color" id="accent-color-hex"/>
 				</div>
 
+				<div class="divide accent-color"></div>
+
 				<a class="text">Quick links</a>
 				<textarea cols="40" rows="3" class="config-text text text-area accent-color" id="ql-value"></textarea>
+
+				<a class="text">Share link<br></a>
+				<a class="text">(Enter to load)</a>
+				<div class="share-area">
+					<input type="text" onkeydown="if (event.keyCode == 13) loadLink()" class="config-text text accent-color share-text" id="share-value"/>
+				</div>
 			</div>
 
 			<div class="cfg-buttons">
@@ -450,7 +532,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var debug = false;
+		var debug = true;
 
 		if (debug) {
 			document.getElementById("sidebar").style.width = "250px";
@@ -465,6 +547,8 @@
 		var text_color = getCookie("text_color");
 		var quick_link_string = getCookie("quick_links").replace(/<br>/g, "\n");
 		var engine_url = getCookie("engine_url");
+		var search_font = getCookie("search_font");
+		var quick_link_font = getCookie("quick_link_font");
 
 		if (img_path === "") img_path = "../assets/img/search-logo.png";
 		if (bg_path === "") bg_path = "null";
@@ -473,8 +557,10 @@
 		if (accent_color === "") accent_color = "#292929";
 		if (text_color === "") text_color = "#ffffff";
 		if (quick_link_string === "") quick_link_string = "yt\nhttps://www.youtube.com/feed/subscriptions\nreddit\nhttps://reddit.com/\nsc\nhttps://soundcloud.com/\nimgur\nhttps://imgur.com/";
-		if (engine_url === "") engine_url="duckduckgo.com";
-	
+		if (engine_url === "") engine_url = "duckduckgo.com";
+		if (search_font === "") search_font = "monospace";
+		if (quick_link_font === "") quick_link_font = "monospace";
+
 		function resetValues() {
 			img_path = "../assets/img/search-logo.png";
 			bg_path = "null";
@@ -484,6 +570,8 @@
 			text_color = "#ffffff";
 			quick_link_string = "yt\nhttps://www.youtube.com/feed/subscriptions\nreddit\nhttps://reddit.com/\nsc\nhttps://soundcloud.com/\nimgur\nhttps://imgur.com/";
 			engine_url="duckduckgo.com";
+			search_font = "18px monospace";
+			quick_link_font = "14px monospace";
 		}
 
 		function setValues() {
@@ -495,6 +583,8 @@
 			onPickColor(accent_color, 'accent-color-hex', 'accent-color-panel');
 			onPickColor(text_color, 'text-color-hex', 'text-color-panel');
 			setConfig('ql-value', quick_link_string);
+			setConfig('sf-value', search_font);
+			setConfig('qlf-value', quick_link_font);
 
 			if (engine_url === "duckduckgo.com") {
 				setEngine(engine_url, 'ddg-engine', 'google-engine');
@@ -505,7 +595,6 @@
 		}
 
 		function applyConfig(reset) {
-
 			if (!reset) {
 				// Load values
 				img_path = document.getElementById("logo-value").value;
@@ -514,6 +603,8 @@
 				bg_color = document.getElementById("bg-color-hex").value;
 				accent_color = document.getElementById("accent-color-hex").value;
 				text_color = document.getElementById("text-color-hex").value;
+				search_font = document.getElementById("sf-value").value;
+				quick_link_font = document.getElementById("qlf-value").value;
 
 				quick_link_string = document.getElementById("ql-value").value;
 				
@@ -529,9 +620,11 @@
 			setCookie("accent_color", accent_color);
 			setCookie("text_color", text_color);
 			setCookie("engine_url", engine_url);
+			setCookie("quick_link_font", quick_link_font);
+			setCookie("search_font", search_font);
+
 			var tempCookie = quick_link_string.replace(/\n/g, "<br>");
 			setCookie("quick_links", tempCookie);
-
 			
 			// Apply values
 			if (img_path == "")
@@ -549,9 +642,11 @@
 			setBorderColorByClass("accent-border-color", accent_color);
 			setColorByClass("text", text_color);
 			setBGColorByTag("body", bg_color);
-
+			setFontByClass("ql", quick_link_font);
+			setFontById("searchbox", search_font);
 
 			if (reset) setValues();
+			buildShareLink();
 		}
 
 		setValues();
