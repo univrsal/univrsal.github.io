@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -12,7 +12,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
 
-	<title>universal</title>
+	<title>projects - universal</title>
 	<link rel="stylesheet" href="../css/main.css">
 	<script src="../js/main.js"></script>
 	<script src="https://widget.battleforthenet.com/widget.js" async></script>
@@ -20,12 +20,23 @@
 </head>
 <body>
 
+	<script type="text/javascript">
+		var language = navigator.language || navigator.browserLanguage;
+
+		if (language === "de") {
+			if (getCookie("no_redirect") !== "1") {
+				//document.location.href = '../de/projects';
+				setCookie("no_redirect", "1");	
+			}
+		}
+	</script>
 	<style>
 
 		.main-container .mdl-layout__header,
 		.main-container .mdl-layout__drawer-button {
 			color: gray;
 		}
+		
 		.main-header {
 			background: url('../assets/img/header.jpg') center / cover;
 			height: 30%;
@@ -54,22 +65,40 @@
 
 		}
 
-		.card-jeb > .mdl-card__title {
+		.startpage-card > .mdl-card__title {
 			color: #fff;
 			background:
-			url('../assets/img/jeb.png') bottom right 15% no-repeat #46B6AC;
+			url('../assets/img/search.png') bottom right 15% no-repeat #46B6AC;
 		}
 
-		.card-mpdq > .mdl-card__title {
+		.reloded-card > .mdl-card__title {
 			color: #fff;
 			background:
-			url('../assets/img/mpdq.png') bottom right 15% no-repeat #46B6AC;	
+			url('../assets/img/reloded.png') bottom right 15% no-repeat #46B6AC;	
 		}
 
-		.blog-card > .mdl-card__title {
-			color: #424242;
+		.plugin-card > .mdl-card__title {
+			color: #fff;
 			background:
-			url('../assets/img/blog.png') bottom right 15% no-repeat #46B6AC;	
+			url('../assets/img/input-overlay.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.va-card > .mdl-card__title {
+			color: #fff;
+			background:
+			url('../assets/img/va.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.opp-card > .mdl-card__title {
+			color: gray;
+			background:
+			url('../assets/img/opp.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.snap-card > .mdl-card__title {
+			color: #fff;
+			background:
+			url('../assets/img/snap.png') bottom right 15% no-repeat #46B6AC;	
 		}
 
 		.mdl-card {
@@ -110,7 +139,7 @@
 			padding-left: 40px;
 			padding-right: 40px;
 			background: url('../assets/img/content.jpg') center / cover;
-	
+
 		}
 
 	</style>
@@ -181,11 +210,9 @@
 					<div class="mdl-cell mdl-cell--2-col spacer-left"></div>
 
 					<div class="mdl-cell mdl-cell--8-col content-cell">
-						<h3 class="main-title">Oh, hey</h3>
+						<h3 class="main-title">Other projects</h3>
 						<div class="body-text main-text">
-							Sieht so aus als hättest du es irgendwie zu dieser Seite geschafft. Du kannst dir hier ein paar von meinen Projekten anschauen oder geh zu <a href="./contact/" class="body-text main-text body-link">Kontakt</a> um mir eine Nachricht zu senden.  <br>
-							Das meiste hier hängt entweder mit programmieren oder Spielen zusammen. Wenn dich das Zeug interessiert findest du vielleicht etwas ansprechendes.<br> <br>
-							Ein paar meiner Projekte (<a href="./projects/" class="body-text main-text body-link">weitere projekte</a>):
+							I have a bunch of other projects, finished and unfinished (mostly unfinished):
 						</div>
 
 						<div class="mdl-grid">
@@ -194,54 +221,104 @@
 
 								<div class="mdl-grid">
 
-									<div class="mdl-cell mdl-cell--4-col card-jeb mdl-card info-card mdl-shadow--2dp">
+									<div class="mdl-cell mdl-cell--4-col startpage-card mdl-card info-card mdl-shadow--2dp">
 										<div class="mdl-card__title mdl-card--expand">
-											<h2 class="mdl-card__title-text">JustEnoughButtons</h2>
+											<h2 class="mdl-card__title-text">Startpage</h2>
 										</div>
 										<div class="mdl-card__supporting-text">
-											Fügt extra Werkzeuge zum Minecraft Inventar zu
+											An easily customizable startpage. Change things like images or colors
 										</div>
 										<div class="mdl-card__actions mdl-card--border">
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://minecraft.curseforge.com/projects/just-enough-buttons" target="_blank">
-												Download
-											</a>
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/JustEnoughButtons" target="_blank">
-												Quellcode
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://univrsal.github.io/search" target="_blank">
+												Try it
 											</a>
 										</div>
 									</div>
 
-									<div class="mdl-cell mdl-cell--4-col card-mpdq info-card mdl-card mdl-shadow--2dp">
+									<div class="mdl-cell mdl-cell--4-col reloded-card info-card mdl-card mdl-shadow--2dp">
 										<div class="mdl-card__title mdl-card--expand">
-											<h2 class="mdl-card__title-text">mpdq</h2>
+											<h2 class="mdl-card__title-text">Reloded</h2>
 										</div>
 										<div class="mdl-card__supporting-text">
-											Steuert MediaPlayerDaemon (Musikplayer) über die Taskbar
+											Remake of Lode Runner in SDL2. (Unfinished)
 										</div>
 										<div class="mdl-card__actions mdl-card--border">
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/mpdq/releases" target="_blank">
-												Download
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/reloded" target="_blank">
+												View source
 											</a>
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/mpdq" target="_blank">
-												Quellcode
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://universallp.wordpress.com/2017/07/25/lode-runner/" target="_blank">
+												Read more
 											</a>		
 										</div>
 									</div>
 
-									<div class="mdl-cell mdl-cell--4-col blog-card info-card mdl-card mdl-shadow--2dp">
+									<div class="mdl-cell mdl-cell--4-col plugin-card info-card mdl-card mdl-shadow--2dp">
 										<div class="mdl-card__title mdl-card--expand">
-											<h2 class="mdl-card__title-text">Blog</h2>
+											<h2 class="mdl-card__title-text">Input Overlay</h2>
 										</div>
 										<div class="mdl-card__supporting-text">
-											Wordpressseite mit zufälligen Dingen, die mir einfallen
+											OBS Studio plugin to show keyboard and mouse inputs
 										</div>
 										<div class="mdl-card__actions mdl-card--border">
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="http://universallp.wordpress.com" target="_blank">
-												Zum Blog
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/input-overlay/releases" target="_blank">
+												Download
+											</a>
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/input-overlay" target="_blank">
+												View source
 											</a>
 										</div>
 									</div>	
 
+									<div class="mdl-cell mdl-cell--4-col va-card info-card mdl-card mdl-shadow--2dp">
+										<div class="mdl-card__title mdl-card--expand">
+											<h2 class="mdl-card__title-text">VA</h2>
+										</div>
+										<div class="mdl-card__supporting-text">
+											Minecraft Mod that adds small tweaks for easier automation
+										</div>
+										<div class="mdl-card__actions mdl-card--border">
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://minecraft.curseforge.com/projects/vanillaautomation" target="_blank">
+												Download
+											</a>
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/vanillaautomation" target="_blank">
+												View source
+											</a>
+										</div>
+									</div>	
+
+									<div class="mdl-cell mdl-cell--4-col opp-card info-card mdl-card mdl-shadow--2dp">
+										<div class="mdl-card__title mdl-card--expand">
+											<h2 class="mdl-card__title-text">opp</h2>
+										</div>
+										<div class="mdl-card__supporting-text">
+											Tool to visualize packet latency to servers written in Python and Java
+										</div>
+										<div class="mdl-card__actions mdl-card--border">
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/opp/releases" target="_blank">
+												Download
+											</a>
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/opp" target="_blank">
+												View source
+											</a>
+										</div>
+									</div>	
+
+									<div class="mdl-cell mdl-cell--4-col snap-card info-card mdl-card mdl-shadow--2dp">
+										<div class="mdl-card__title mdl-card--expand">
+											<h2 class="mdl-card__title-text">Snap</h2>
+										</div>
+										<div class="mdl-card__supporting-text">
+											Take screenshots. Open, select & upload to imgur. That's it.
+										</div>
+										<div class="mdl-card__actions mdl-card--border">
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/Snap/releases" target="_blank">
+												Download
+											</a>
+											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="https://github.com/univrsal/Snap" target="_blank">
+												View source
+											</a>
+										</div>
+									</div>
 								</div>
 
 							</div>
@@ -264,12 +341,12 @@
 
 			<footer class="mdl-mini-footer main-footer">
 				<div class="mdl-mini-footer__left-section">
-					<div class="mdl-logo">universal</div>
+					<div class="mdl-logo" href="https://univrsal.github.io/">universal</div>
 					<ul class="mdl-mini-footer__link-list">
-						<li><a href="../">English</a></li>
-						<li><a href="https://getmdl.io/index.html" target="_blank">Entwickelt mit MDL</a></li>
-						<li><a href="https://github.com/univrsal/univrsal.github.io" target="_blank">Quellcode</a></li>
-						<li><a href="./contact/">Kontakt</a></li>
+						<li><a href="../de/projects/">Deutsch</a></li>
+						<li><a href="https://getmdl.io/index.html" target="_blank">Powered by MDL</a></li>
+						<li><a href="https://github.com/univrsal/univrsal.github.io" target="_blank">Source code</a></li>
+						<li><a href="../contact/">Contact</a></li>
 					</ul>
 				</div>
 			</footer>
@@ -297,7 +374,7 @@
 		function showToast() {
 			'use strict';
 			var data = {
-				message: 'Mein Discord tag: universal#8427',
+				message: 'My Discord tag: universal#8427',
 				timeout: 4000,
 			};
 			snackbarContainer.MaterialSnackbar.showSnackbar(data);
