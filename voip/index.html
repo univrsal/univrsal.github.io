@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Material Design Lite -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+
+	<title>contact - universal</title>
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/contact.css">
+	<script src="../js/main.js"></script>
+	<link rel="shortcut icon" href="../assets/img/favicon-alpha.ico" />
+</head>
+<body>
+
+	<style>
+		.main-container .mdl-layout__header,
+		.main-container .mdl-layout__drawer-button {
+			color: gray;
+		}
+
+		.main-header {
+			background: url('../assets/img/header.jpg') center / cover;
+			height: 30%;
+		}
+
+		.discord-widget {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+
+		#main-div {
+			display: flex;
+			flex-direction: column;
+			padding: 0px;
+		}
+		
+		.main-grid {
+			height: 100% !important;
+			flex:1 1 1px;
+			width: 100%;
+		}
+
+		.main-footer {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		.info-card.mdl-card {
+			width: 320px;
+			height: 220px;
+
+		}
+
+		.card-jeb > .mdl-card__title {
+			color: #fff;
+			background:
+			url('../assets/img/jeb.png') bottom right 15% no-repeat #46B6AC;
+		}
+
+		.card-mpdq > .mdl-card__title {
+			color: #fff;
+			background:
+			url('../assets/img/mpdq.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.blog-card > .mdl-card__title {
+			color: #424242;
+			background:
+			url('../assets/img/blog.png') bottom right 15% no-repeat #46B6AC;	
+		}
+
+		.mdl-card {
+			max-width: 70%;
+
+			margin: 5px auto;
+		}
+
+		.btn-top {
+			width: 35px;
+		}
+
+		.main-container {
+			background-color: #7F7F7F;
+			color: white;
+		}
+
+		.spacer-left {
+			background: url('../assets/img/space-left.jpg') center / cover;
+			margin: 0px;
+			-webkit-box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+			-moz-box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+			box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+		}
+
+		.spacer-right {
+			background: url('../assets/img/space-right.jpg') center / cover;
+			margin: 0px;
+			z-index: -1;
+			-webkit-box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+			-moz-box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+			box-shadow: inset 0px 0px 17px 3px rgba(0,0,0,0.75);
+		}
+
+		.content-cell {
+			margin: 0px;
+			padding-top: 20px;
+			padding-left: 40px;
+			padding-right: 40px;
+			background: url('../assets/img/content.jpg') center / cover;
+		}
+
+		.contact-list {
+			list-style-type: none;
+		}
+
+		.contact-list > li {
+			display: inline;
+		}
+
+		.contact-list > li > a {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 20px;
+			font-style: italic;
+			color: white;
+			text-decoration: none;
+		}
+
+		.contact-list > li > .spacer {
+			margin-left: 10px;
+			margin-right: 10px;
+		}
+	</style>
+
+	<div id="loader">
+		<div id="spinner"></div>
+		<noscript>
+			<div id="js-info">
+				You'll need javascript
+			</div>
+		</noscript>
+	</div>  
+
+	<div id="page">
+		<div class="main-container mdl-layout mdl-js-layout">
+			<div class="main-header">
+				<header class="mdl-layout__header mdl-layout__header--transparent">
+					<div class="mdl-layout__header-row">
+
+						<!-- Add spacer, to align navigation to the right -->
+						<div class="mdl-layout-spacer"></div>
+						<!-- Navigation -->
+						<nav class="mdl-navigation">
+							<a class="head-link-icon" id="git-link" href="https://github.com/univrsal" target="_blank"> 
+								<img class="head-link-icon link-image" src="../assets/img/github.png">
+								<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="git-link">
+									Github
+								</div>
+							</a>
+
+							<a class="head-link-icon" id="twitter-link" href="https://twitter.com/univrsal_" target="_blank">
+								<img class="head-link-icon link-image" src="../assets/img/twitter.png">
+								<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="twitter-link">
+									Twitter
+								</div>
+							</a>
+
+							<a class="head-link-icon" id="steam-link" href="http://steamcommunity.com/id/univrsal/" target="_blank">
+								<img class="head-link-icon link-image" src="../assets/img/steam.png">
+								<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="steam-link">
+									Steam
+								</div>
+							</a>
+
+							<a class="head-link-icon" id="discord-link" onclick="showToast()">
+								<img class="head-link-icon link-image" src="../assets/img/discord.png">
+								<div class="mdl-tooltip mdl-tooltip--large" data-mdl-for="discord-link">
+									Discord Tag
+								</div>
+							</a>
+						</nav>
+					</div>
+				</header>
+			</div>
+
+			<div class="mdl-layout__drawer">
+				<span class="mdl-layout-title">Home</span>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" href="https://github.com/univrsal" target="_blank">Github</a>
+					<a class="mdl-navigation__link" href="http://steamcommunity.com/id/univrsal/" target="_blank">Steam</a>
+					<a class="mdl-navigation__link" href="https://twitter.com/univrsal_" target="_blank">Twitter</a>
+					<a class="mdl-navigation__link" id ="discord-link" onclick="showToast()">Discord</a>
+				</nav>
+			</div>
+
+			<main id="main-div" class="mdl-layout__content" onscroll="scrollFunction()">
+				<div class="mdl-grid main-grid mdl-grid--no-spacing">
+					<div class="mdl-cell mdl-cell--2-col spacer-left"></div>
+
+					<div class="mdl-cell mdl-cell--8-col content-cell">
+						<h3 class="main-title">Join our discord:</h3>
+						<div class="main-text">
+							<iframe class="discord-widget" src="https://discordapp.com/widget?id=306469385378332675&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+						</div>
+					</div>
+
+					<div class="mdl-cell mdl-cell--2-col spacer-right"></div>
+				</div>	
+
+				<button onclick="topFunction()" id="to-top-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+					<img class="btn-icon" src="../assets/img/up.png">
+				</button>
+			</main>
+
+			<div id="main-snackbar" class="mdl-js-snackbar mdl-snackbar">
+				<div class="mdl-snackbar__text"></div>
+				<button class="mdl-snackbar__action" type="button"></button>
+			</div>
+
+			<footer class="mdl-mini-footer main-footer">
+				<div class="mdl-mini-footer__left-section">
+					<div class="mdl-logo">universal</div>
+					<ul class="mdl-mini-footer__link-list">
+						<li><a href="../de/contact/">Deutsch</a></li>
+						<li><a href="https://getmdl.io/index.html" target="_blank">Powered by MDL</a></li>
+						<li><a href="https://github.com/univrsal/univrsal.github.io" target="_blank">Source code</a></li>
+						<li><a>Contact</a></li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var mainDiv = document.getElementById('main-div');
+		var snackbarContainer = document.querySelector('#main-snackbar');
+		var showSnackbarButton = document.querySelector('#discord-link');
+
+		function scrollFunction() {
+			console.log(mainDiv.scrollTop);
+			if (mainDiv.scrollTop > 20) {
+				document.getElementById("to-top-btn").style.display = "block";
+			} else {
+				document.getElementById("to-top-btn").style.display = "none";
+			}
+		}
+
+		// When the user clicks on the button, scroll to the top of the document
+		function topFunction() {
+			mainDiv.scrollTop = 0;
+		}
+
+		function showToast() {
+			'use strict';
+			var data = {
+				message: 'My Discord tag: universal#8427',
+				timeout: 4000,
+			};
+			snackbarContainer.MaterialSnackbar.showSnackbar(data);
+		};
+	</script>
+</body>
+</html>
