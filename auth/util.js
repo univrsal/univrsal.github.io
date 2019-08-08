@@ -1,7 +1,7 @@
 var $_GET = {};
 
-function get_vars()
-{
+/* Gets all GET variables encoded into the url */
+function get_vars() {
 
     if(document.location.toString().indexOf('?') !== -1) {
         var query = document.location
@@ -17,8 +17,6 @@ function get_vars()
            $_GET[aux[0]] = aux[1];
         }
     }
-    //get the 'index' query parameter
-    //alert($_GET['index']);
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -44,42 +42,4 @@ function getCookie(cname) {
     return "";
 }
 
-function postWithoutAjax( url, params ){
-    
-    params = params || {};
-
-    // function to remove the iframe
-    var removeIframe = function( iframe ){
-        iframe.parentElement.removeChild(iframe);
-    };
-    
-    // make a iframe...
-    var iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    
-    iframe.onload = function(){
-        document = this.contentWindow.document;
-        
-        // Make a invisible form
-        var form = document.createElement('form');
-        form.method = 'get';
-        form.action = url;
-        document.body.appendChild(form);
-        
-        // pass the parameters
-        for( var name in params ){
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = name;
-            input.value = params[name];
-            form.appendChild(input);
-        }
-        
-        form.submit();
-        // remove the iframe
-        removeIframe(iframe);
-    };
-    
-    document.body.appendChild(iframe);
-}
 get_vars();
