@@ -36,12 +36,12 @@
             if (mismatch || error !== undefined) {
                 if (error === undefined)
                     error = mismatch ? "State mismatch (Make sure you allow cookies)" : "Unkown";
-                $("#msg").text("Error: " + error);
-                console.log("error");
+                $("#heading").text("Error!");
+                $("#msg").text(error);
             } else {
-                $("#msg").text("Success! code: ");
+                $("#heading").text("Success!");
+                $("#msg").text("Now copy the code into the plugin to make it connect with your spotify account!");
                 $("#authCode").text($_GET['code']);
-                $("#subtext").text("Now copy the code into the plugin to make it connect with your spotify account!");
             }
         });
     </script>
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="column"></div>
                 <div class="column">
-                    <h1>Create Token</h1>
+                    <h1 id="heading">Create Token</h1>
                 </div>
                 <div class="column"></div>
             </div>
@@ -60,7 +60,6 @@
             <div class="column"></div>
             <div class="column">
                 <p id="msg"></p>
-                <p id="subtext"></p>
                 <form>
                     <fieldset>
                         <label for="authCode">Authentication code</label>
