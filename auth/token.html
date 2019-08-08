@@ -17,10 +17,14 @@
         body {
             background-color: #333333;
         }
-        p, h1 {
+        p, label, h1 {
             color: #ffffff;
         }
         h1 { padding-top: 20px }
+        textarea {
+            background-color: white;
+            color: #333333;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -35,8 +39,9 @@
                 $("#msg").text("Error: " + error);
                 console.log("error");
             } else {
-                $("#msg").text("Success! code: " + $_GET['code']);
-                $("#subtext").text("Now copy the code into the plugin to make it connect with you'r spotify account!");
+                $("#msg").text("Success! code: ");
+                $("#authCode").text($_GET['code']);
+                $("#subtext").text("Now copy the code into the plugin to make it connect with your spotify account!");
             }
         });
     </script>
@@ -56,6 +61,14 @@
             <div class="column">
                 <p id="msg"></p>
                 <p id="subtext"></p>
+                <form>
+                    <fieldset>
+                        <label for="authCode">Authentication code</label>
+                        <textarea placeholder="Authentication code" id="authCode"></textarea>
+                        <div class="float-right">
+                        </div>
+                    </fieldset>
+                </form>    
             </div>
             <div class="column"></div>
         </div>
