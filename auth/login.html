@@ -13,10 +13,7 @@
                 document.write("<h1> Error: No state provided!</h1>");
                 document.write("<p>Make sure you launched the URL from the plugin settings</p>");
             } else {
-                window.location.replace("https://accounts.spotify.com/authorize?client_id=847d7cf0c5dc4ff185161d1f000a9d0e&\
-                    response_type=code&redirect_uri=https%3A%2F%2Funivrsal.github.io%2Fauth%2Ftoken&\
-                    scope=user-read-currently-playing%20user-modify-playback-state%20user-read-playback-state&\
-                    state=" + $_GET['state']);
+                window.location.replace("https://accounts.spotify.com/authorize?client_id=847d7cf0c5dc4ff185161d1f000a9d0e&response_type=code&redirect_uri=https%3A%2F%2Funivrsal.github.io%2Fauth%2Ftoken&scope=user-read-currently-playing%20user-modify-playback-state%20user-read-playback-state&state=" + $_GET['state']);
                 setCookie("state", $_GET['state'], 2);
             }
         </script>
