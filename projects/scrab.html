@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-vader.css" type="text/css">
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../css/scrab.css" type="text/css">
+    <title>scrab - univrsal</title>
+    <link rel="shortcut icon" href="../assets/img/favicon-alpha.ico" />
+</head>
+
+<body>
+    <div>
+        <img class="shadow center" src="https://raw.githubusercontent.com/univrsal/scrab/master/logo.512.png"
+            width="25%">
+    </div>
+    <p>Is a plugin for <a href="https://obsproject.com/">obs-studio</a> which adds a new hotkey that allows you
+        to take a screenshot and immediately add it to obs for your viewers to see.
+    </p>
+
+    <a href="../assets/img/scrab.gif" target="_blank">
+        <img src="../assets/img/scrab.gif" title="Click for full image" style="cursor: pointer;">
+    </a>
+
+    <h4>Installation</h4>
+    First download the latest release from <a href="https://github.com/univrsal/scrab/releases/latest">Github</a>.
+    Choose either <code>linux64</code> or <code>win32.64</code> For either 64bit linux or Windows (Both architectures).<br>
+
+    <h6>Windows</h6>
+    <ol>
+        <li>Open your obs-studio installation forlder (eg. Right click on the shortcut 
+            and click <code>Open file location</code>)</li>
+        <li>Navigate two directories up</li>
+        <li>Drop the folders <code>data</code> and <code>obs-plugins</code> in the directory</li>
+        <li>You're done!</li>
+    </ol>
+    <h6>Linux</h6>
+    <ol>
+        <li>Unzip the archive <br>
+            <code>$ unzip ~/Downloads/scrab.* -d ~/Downloads/scrab</code></li>
+        <li>Navigate to your obs config folder <br><code>$ cd ~/.config/obs-studio/</code></li>
+        <li>Create a folder for the plugin <br><code>$ mkdir scrab</code></li>
+        <li>Copy the folders <code>bin</code> and <code>data</code> into the new folder<br>
+            <code>$ mv ~/Downloads/scrab/bin ./</code><br>
+            <code>$ mv ~/Downloads/scrab/data ./</code>
+        </li>
+        <li>You're done!</li>
+    </ol>
+
+    <h4>Issues? Suggestions?</h4>
+    You can report issues over on <a href="https://github.com/univrsal/scrab">github.com/univrsal/scrab</a> or
+    <a href="../contact">contact</a> me.
+</body>
+
+</html>
