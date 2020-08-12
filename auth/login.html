@@ -40,14 +40,12 @@
                 get_vars();
                 var state = Math.floor((Math.random() * 0xffffffff) + 1);
 
-                
-                if ($_GET['client_id'] === undefined) {
-                    
-                    return;
+                var client_id = $_GET['client_id'];
+                if (client_id === undefined) {
+                    client_id = '847d7cf0c5dc4ff185161d1f000a9d0e';
                 }
-
                     
-                var url = 'https://accounts.spotify.com/authorize?client_id=' + $_GET['client_id'] + '&response_type=code&redirect_uri=https%3A%2F%2Funivrsal.github.io%2Fauth%2Ftoken&scope=user-read-currently-playing%20user-modify-playback-state%20user-read-playback-state&state=' + state;
+                var url = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=code&redirect_uri=https%3A%2F%2Funivrsal.github.io%2Fauth%2Ftoken&scope=user-read-currently-playing%20user-modify-playback-state%20user-read-playback-state&state=' + state;
                 window.location.replace(url);
                 setCookie("state", state, 2);
             }
