@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="../../auth/util.js"></script>
+        <script src="../../auth/jquery.js"></script>
+     
+        <title>
+            Create Token
+        </title>        
+    </head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+    <style>
+        body {
+            background-color: #333333;
+        }
+        p, label, h1 {
+            color: #ffffff;
+        }
+        h1 { padding-top: 20px }
+        textarea {
+            background-color: white;
+            color: #333333;
+            min-height: 150px;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            get_vars();
+            var error = $_GET['error'];
+
+            if (error !== undefined) {
+                $("#heading").text("Error!");
+                $("#msg").text(error);
+            } else {
+                $("#heading").text("Success!");
+                $("#msg").text("Now copy the code into the plugin to make it connect with your spotify account!");
+                $("#authCode").text($_GET['code']);
+            }
+        });
+    </script>
+    <body>
+        <div class="clearfix">
+            <div class="float-left"></div>
+            <div class="row">
+                <div class="column"></div>
+                <div class="column">
+                    <h1 id="heading">Create Token</h1>
+                </div>
+                <div class="column"></div>
+            </div>
+      
+            <div class="row">
+            <div class="column"></div>
+            <div class="column">
+                <p id="msg"></p>
+                <form>
+                    <fieldset>
+                        <label for="authCode">Authentication code</label>
+                        <textarea placeholder="Authentication code" id="authCode"></textarea>
+                        <div class="float-right"></div>
+                    </fieldset>
+                </form>    
+            </div>
+            <div class="column"></div>
+            </div>
+        <div class="float-right"></div>
+      </div>
+    </body>
+</html>
