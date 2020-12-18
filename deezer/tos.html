@@ -44,9 +44,9 @@
                 if (client_id === undefined) {
                     client_id = '451782';
                 }
+                setCookie("state", state, 2);
                 var url = 'https://connect.deezer.com/oauth/auth.php?app_id=' + client_id + '&redirect_uri=https%3A%2F%2Funivrsal.github.io%2Fdeezer%2Ftoken&perms=offline_access,basic_access,email,listening_history'
                 window.location.replace(url);
-                setCookie("state", state, 2);
             }
 
             if (getCookie('terms') === 'true')
