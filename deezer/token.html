@@ -30,8 +30,11 @@
         $(document).ready(function() {
             get_vars();
             var error = $_GET['error'];
-
-            if (error !== undefined) {
+            var saved_state = getCookie("state");
+            var mismatch = saved_state !== $_GET['state'];
+            if (mismatch || error !== undefined) {
+                if (error === undefined)
+                    error = mismatch ? "State mismatch (Make sure you allow cookies)" : "Unkown";
                 $("#heading").text("Error!");
                 $("#msg").text(error);
             } else {
